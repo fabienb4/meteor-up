@@ -1,5 +1,5 @@
 {
-  "name": "mup",
+  "name": "deb-mup",
   "version": "0.9.0",
   "description": "Production Quality Meteor Deployments",
   "dependencies": {
@@ -11,12 +11,19 @@
     "underscore": "1.7.0"
   },
   "bin": {
-    "mup": "./bin/mup"
+    "deb-mup": "./bin/deb-mup"
   },
-  "author": "Arunoda Susiripala <arunoda.susiripala@gmail.com>",
+  "author": "Fabien Blanchard <fabienb4.b4soft@gmail.com>",
+  "contributors": [
+    "Arunoda Susiripala <arunoda.susiripala@gmail.com>"
+  ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/arunoda/meteor-up.git"
+    "url": "git://github.com/fabienb4/meteor-up.git"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fabienb4/meteor-up/issues"
+  },
+  "homepage": "https://github.com/fabienb4/meteor-up"
 }

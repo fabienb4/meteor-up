@@ -1,0 +1,97 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:             meteor-up-<%= appName %>
+# Required-Start:       $local_fs $remote_fs $network $syslog
+# Required-Stop:        $local_fs $remote_fs $network $syslog
+# Default-Start:        2 3 4 5
+# Default-Stop:         0 1 6
+# Short-Description:    A meteor-up powered meteor instance
+# Description:          A meteor-up powered meteor instance
+### END INIT INFO
+# Simple Meteor init.d script conceived to work on Linux systems
+# as it does use of the /proc filesystem.
+
+# run as user
+user=meteoruser
+
+# add userdown config
+export USERDOWN_UID=$user USERDOWN_GID=$user
+export FOREVER_ROOT=/var/run/forever
+
+NAME=<%= appName %>
+BASE_DIR=/opt/$NAME
+APP_EXEC=$BASE_DIR/app/main.js
+APP_VARS=$BASE_DIR/config/env.sh
+
+pidfile=/var/run/$NAME.pid
+logfile=$BASE_DIR/tmp/$NAME.log
+lockfile=/var/lock/$NAME
+
+forever=`which forever`
+
+if [ -z "$forever" ]; then
+    echo "ERROR: can't find forever"
+    exit 1
+fi
+
+start() {
+    echo "Starting $NAME meteor instance"
+
+    touch $pidfile
+    chown $user $pidfile
+
+    touch $logfile
+    chown $user $logfile
+
+    # add custom environment variables
+    if [ -f "$APP_VARS" ]; then
+        . $APP_VARS
+    fi
+
+    $forever -c userdown -l $logfile -a --pidFile $pidfile --minUptime 2000 --spinSleepTime 1000 $APP_EXEC > /dev/null 2>&1 &
+
+    RETVAL=$?
+
+    [ $RETVAL = 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo "Stopping $NAME meteor instance"
+
+    $forever stop $APP_EXEC > /dev/null 2>&1
+
+    rm -f $pidfile > /dev/null 2>&1
+    rm -f $lockfile > /dev/null 2>&1
+    return 0
+}
+
+status() {
+    echo "$NAME meteor instance status: "
+
+    $forever list
+
+    return 0
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    status)
+        status
+        ;;
+    *)
+        echo "Usage:  {start|stop|restart|status}"
+        exit 1
+        ;;
+esac
+
+exit $RETVAL

@@ -1,8 +1,10 @@
-# Meteor Up
+# Meteor Up Debian (uses Sysvinit instead of Upstart)
 
 #### Production Quality Meteor Deployments
 
-Meteor Up (mup for short) is a command line tool that allows you to deploy any [Meteor](http://meteor.com) app to your own server. It supports only Debian/Ubuntu flavours and Open Solaris at the moments. (PRs are welcome)
+Meteor Up Debian (deb-mup for short) is a command line tool that allows you to deploy any [Meteor](http://meteor.com) app to your own server. It is tailored to use Sysvinit instead of Upstart, making it Debian friendly out of the box.
+
+> /!\ Warning: Stud configuration hasn't been tested.
 
 > Screencast: [How to deploy a Meteor app with Meteor Up (by Sacha Grief)](https://www.youtube.com/watch?v=WLGdXtZMmiI)
 
@@ -51,7 +53,7 @@ Meteor Up (mup for short) is a command line tool that allows you to deploy any [
 
 ### Installation
 
-    npm install -g mup
+    npm install -g deb-mup
 
 If you are looking for password-based authentication, you need to [install sshpass](https://gist.github.com/arunoda/7790979) on your local development machine.
 
@@ -59,7 +61,7 @@ If you are looking for password-based authentication, you need to [install sshpa
 
     mkdir ~/my-meteor-deployment
     cd ~/my-meteor-deployment
-    mup init
+    deb-mup init
 
 This will create two files in your Meteor Up project directory:
 
@@ -119,16 +121,16 @@ This will create two files in your Meteor Up project directory:
   },
 
   // Meteor Up checks if the app comes online just after the deployment.
-  // Before mup checks that, it will wait for the number of seconds configured below.
+  // Before deb-mup checks that, it will wait for the number of seconds configured below.
   "deployCheckWaitTime": 15
 }
 ```
 
 ### Setting Up a Server
 
-    mup setup
+    deb-mup setup
 
-This will setup the server for the `mup` deployments. It will take around 2-5 minutes depending on the server's performance and network availability.
+This will setup the server for the `deb-mup` deployments. It will take around 2-5 minutes depending on the server's performance and network availability.
 
 #### Ssh based authentication
 
@@ -157,9 +159,9 @@ When this process is not working you might encounter the following error:
 This is how Meteor Up will configure the server for you based on the given `appName` or using "meteor" as default appName. This information will help you customize the server for your needs.
 
 * your app lives at `/opt/<appName>/app`
-* mup uses `upstart` with a config file at `/etc/init/<appName>.conf`
-* you can start and stop the app with upstart: `start <appName>` and `stop <appName>`
-* logs are located at: `/var/log/upstart/<appName>.log`
+* deb-mup uses `sysvinit` with a config file at `/etc/init.d/<appName>.conf`
+* you can start and stop the app with service: `service <appName> start` and `service <appName> stop`
+* logs are located at: `/opt/<appName>/tmp/<appName>.log`
 * MongoDB installed and bound to the local interface (cannot access from the outside)
 * the database is named `<appName>`
 
@@ -167,7 +169,7 @@ For more information see [`lib/taskLists.js`](https://github.com/arunoda/meteor-
 
 ### Deploying an App
 
-    mup deploy
+    deb-mup deploy
 
 This will bundle the Meteor project and deploy it to the server.
 
@@ -195,21 +197,21 @@ Sometimes, you might be using `mrt`, or Meteor from a git checkout. By default, 
 
 ### Access Logs
 
-    mup logs -f
+    deb-mup logs -f
 
-Mup can tail logs from the server and supports all the options of `tail`.
+deb-mup can tail logs from the server and supports all the options of `tail`.
 
 ### Reconfiguring & Restarting
 
 After you've edit environmental variables or `settings.json`, you can reconfigure the app without deploying again. Use the following command to do update the settings and restart the app.
 
-    mup reconfig
+    deb-mup reconfig
 
 If you want to stop, start or restart your app for any reason, you can use the following commands to manage it.
 
-    mup stop
-    mup start
-    mup restart
+    deb-mup stop
+    deb-mup start
+    deb-mup restart
 
 ### Accessing the Database
 
@@ -253,6 +255,8 @@ Now setup both projects and deploy as you need.
 
 ### SSL Support
 
+> /!\ Warning: This feature is untested.
+
 Meteor Up has the built in SSL support. It uses [stud](https://github.com/bumptech/stud) SSL terminator for that. First you need to get a SSL certificate from some provider. This is how to do that:
 
 * [First you need to generate a CSR file and the private key](http://www.rackspace.com/knowledge_center/article/generate-a-csr-with-openssl)
@@ -279,7 +283,7 @@ Then add following configuration to your `mup.json` file.
 }
 ~~~
 
-Now, simply do `mup setup` and now you've the SSL support.
+Now, simply do `deb-mup setup` and now you've the SSL support.
 
 > * By default, it'll think your Meteor app is running on port 80. If it's not, change it with the `backendPort` configuration field.
 > * SSL terminator will run on the default SSL port `443`
@@ -288,25 +292,25 @@ Now, simply do `mup setup` and now you've the SSL support.
 
 ### Updating
 
-To update `mup` to the latest version, just type:
+To update `deb-mup` to the latest version, just type:
 
-    npm update mup -g
+    npm update deb-mup -g
 
-You should try and keep `mup` up to date in order to keep up with the latest Meteor changes. But note that if you need to update your Node version, you'll have to run `mup setup` again before deploying.
+You should try and keep `deb-mup` up to date in order to keep up with the latest Meteor changes. But note that if you need to update your Node version, you'll have to run `deb-mup setup` again before deploying.
 
 ### Troubleshooting
 
 #### Check Logs
-If you suddenly can't deploy your app anymore, first use the `mup logs -f` command to check the logs for error messages.
+If you suddenly can't deploy your app anymore, first use the `deb-mup logs -f` command to check the logs for error messages.
 
 One of the most common problems is your Node version getting out of date. In that case, see “Updating” section above.
 
 #### Verbose Output
 If you need to see the output of `meteor-up` (to see more precisely where it's failing or hanging, for example), run it like so:
 
-    DEBUG=* mup <command>
+    DEBUG=* deb-mup <command>
 
-where `<command>` is one of the `mup` commands such as `setup`, `deploy`, etc.
+where `<command>` is one of the `deb-mup` commands such as `setup`, `deploy`, etc.
 
 ### Binary Npm Module Support
 

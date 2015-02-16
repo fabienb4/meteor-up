@@ -21,7 +21,6 @@ sudo rm -rf stud
 sudo mkdir -p /opt/stud
 
 #initial permission
-sudo chown -R $USER /etc/init
 sudo chown -R $USER /opt/stud
 
 #create non-privileged user
