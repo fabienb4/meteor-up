@@ -1,4 +1,5 @@
-# Meteor Up Debian (uses Sysvinit instead of Upstart)
+# Meteor Up Debian
+> ### Uses Sysvinit instead of Upstart
 
 #### Production Quality Meteor Deployments
 
