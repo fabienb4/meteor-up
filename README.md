@@ -1,6 +1,8 @@
 # Meteor Up Debian
 > ### Uses Sysvinit instead of Upstart
 
+###### Credits to [Arunoda](https://github.com/arunoda) for creating the [original version](https://github.com/arunoda/meteor-up)!
+
 #### Production Quality Meteor Deployments
 
 Meteor Up Debian (deb-mup for short) is a command line tool that allows you to deploy any [Meteor](http://meteor.com) app to your own server. It is tailored to use Sysvinit instead of Upstart, making it Debian friendly out of the box.
