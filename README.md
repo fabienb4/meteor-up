@@ -1,7 +1,7 @@
 # Meteor Up Debian
-> ### Uses Sysvinit instead of Upstart
+### Uses Sysvinit instead of Upstart
 
-###### Credits to [Arunoda](https://github.com/arunoda) for creating the [original version](https://github.com/arunoda/meteor-up)!
+##### Credits to [Arunoda](https://github.com/arunoda) for creating the [original version](https://github.com/arunoda/meteor-up)!
 
 #### Production Quality Meteor Deployments
 
@@ -332,3 +332,6 @@ Fortunately, Meteor Up **will take care** of that job for you and it will detect
 * [Using Meteor Up with Nitrous.io](https://github.com/arunoda/meteor-up/wiki/Using-Meteor-Up-with-Nitrous.io)
 * [Change Ownership of Additional Directories](https://github.com/arunoda/meteor-up/wiki/Change-Ownership-of-Additional-Directories)
 * [Using Meteor Up with NginX vhosts](https://github.com/arunoda/meteor-up/wiki/Using-Meteor-Up-with-NginX-vhosts)
+
+
+[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.svg)](https://gratipay.com/fabienb4/)
