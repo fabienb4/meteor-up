@@ -9,7 +9,7 @@ Meteor Up Debian (deb-mup for short) is a command line tool that allows you to d
 
 > /!\ Warning: Stud configuration hasn't been tested.
 
-> Screencast: [How to deploy a Meteor app with Meteor Up (by Sacha Grief)](https://www.youtube.com/watch?v=WLGdXtZMmiI)
+> Screencast: [How to deploy a Meteor app with Meteor Up (by Sacha Greif)](https://www.youtube.com/watch?v=WLGdXtZMmiI)
 
 **Table of Contents**
 
