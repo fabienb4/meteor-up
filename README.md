@@ -5,6 +5,8 @@
 
 #### Production Quality Meteor Deployments
 
+> **Note: Meteor Up does not support Windows yet!**
+
 Meteor Up Debian (deb-mup for short) is a command line tool that allows you to deploy any [Meteor](http://meteor.com) app to your own server. It is tailored to use Sysvinit instead of Upstart, making it Debian friendly out of the box.
 
 > /!\ Warning: Stud configuration hasn't been tested.
