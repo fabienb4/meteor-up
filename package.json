@@ -1,6 +1,6 @@
 {
   "name": "deb-mup",
-  "version": "0.10.5",
+  "version": "0.10.7",
   "description": "Production Quality Meteor Deployments - Sysvinit version",
   "dependencies": {
     "async": "^0.9.0",
