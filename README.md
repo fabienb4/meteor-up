@@ -88,7 +88,7 @@ This will create two files in your Meteor Up project directory:
       // WARNING: Keys protected by a passphrase are not supported
       //"pem": "~/.ssh/id_rsa"
       // Also, for non-standard ssh port use this
-      //"sshOptions": { "Port" : 49154 },
+      //"sshOptions": { "port" : 49154 },
       // server specific environment variables
       "env": {}
     }
@@ -105,6 +105,10 @@ This will create two files in your Meteor Up project directory:
 
   // Install PhantomJS on the server
   "setupPhantom": true,
+
+  // Show a progress bar during the upload of the bundle to the server.
+  // Might cause an error in some rare cases if set to true, for instance in Shippable CI
+  "enableUploadProgressBar": true,
 
   // Application name (no spaces).
   "appName": "meteor",
