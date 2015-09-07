@@ -17,6 +17,7 @@ Meteor Up Debian (deb-mup for short) is a command line tool that allows you to d
 
 - [Features](#features)
 - [Server Configuration](#server-configuration)
+    - [SSH-key-based authentication (with passphrase)](#ssh-keys-with-passphrase-or-ssh-agent-support)
 - [Installation](#installation)
 - [Creating a Meteor Up Project](#creating-a-meteor-up-project)
 - [Example File](#example-file)
@@ -83,10 +84,9 @@ This will create two files in your Meteor Up project directory:
     {
       "host": "hostname",
       "username": "root",
-      "password": "password"
+      "password": "password",
       // or pem file (ssh based authentication)
-      // WARNING: Keys protected by a passphrase are not supported
-      //"pem": "~/.ssh/id_rsa"
+      //"pem": "~/.ssh/id_rsa",
       // Also, for non-standard ssh port use this
       //"sshOptions": { "port" : 49154 },
       // server specific environment variables
@@ -258,7 +258,7 @@ It is possible to provide server specific environment variables. Add the `env` o
     {
       "host": "hostname",
       "username": "root",
-      "password": "password"
+      "password": "password",
       "env": {
         "SOME_ENV": "the-value"
       }
@@ -295,7 +295,7 @@ Meteor Up has the built in SSL support. It uses [stud](https://github.com/bumpte
 * When asked to select your SSL server type, select it as nginx.
 * Then you'll get a set of files (your domain certificate and CA files).
 
-Now you need combine SSL certificate(s) with the private key and save it in the mup config directory as `ssl.pem`. Check this [guide](http://alexnj.com/blog/configuring-a-positivessl-certificate-with-stud.html) to do that.
+Now you need combine SSL certificate(s) with the private key and save it in the mup config directory as `ssl.pem`. Check this [guide](http://alexnj.com/blog/configuring-a-positivessl-certificate-with-stud) to do that.
 
 Then add following configuration to your `mup.json` file.
 
