@@ -1,7 +1,7 @@
 # Meteor Up Debian
 ### Uses Sysvinit instead of Upstart
 
-> **This package is no longer maintained.**
+> **This package is no longer maintained. If you have a well maintained fork, please send me an email so I can add a link to it here.**
 
 ##### Credits to [Arunoda](https://github.com/arunoda) for creating the [original version](https://github.com/arunoda/meteor-up)!
 
